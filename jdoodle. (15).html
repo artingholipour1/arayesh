@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت آرایش کوآلا</title>
+    <style>
+        @font-face {
+            font-family: 'IRANSans';
+            src: url('IRANSans.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'IRANSans', sans-serif;
+            background: linear-gradient(to bottom, #ffe6e6, #fff0db);
+            color: #333;
+            text-align: center;
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(45deg, #ff9aa2, #ff758f);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 10px 0;
+            background: #ff758f;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #ffe6e6;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: white;
+            background: #ff9aa2;
+            border-radius: 5px;
+        }
+
+        .slider {
+            display: flex;
+            overflow: auto;
+            margin: 20px auto;
+            width: 90%;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            flex: none;
+            margin: 10px;
+            width: 300px;
+            height: 200px;
+            background: #ffe6e6;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        .category {
+            margin: 20px;
+            padding: 15px;
+            border: 2px solid #ff9aa2;
+            display: inline-block;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+            background: #fff0db;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .category:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .category h3 {
+            color: #ff758f;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #ff9aa2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            background: #ff758f;
+            transform: scale(1.1);
+        }
+
+        .cart {
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff0db;
+            border-radius: 5px;
+            display: inline-block;
+            width: 90%;
+        }
+
+        footer {
+            background: #ff758f;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff9aa2;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .category {
+                width: 80%;
+            }
+        }
+
+        input[type="text"] {
+            margin: 15px;
+            padding: 10px;
+            width: 80%;
+            border: 2px solid #ff758f;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>به سایت آرایش کوآلا خوش آمدید!</h1>
+        <p>زیبایی تو، اولویت ماست!</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#categories">محصولات</a></li>
+            <li><a href="#cart">سبد خرید <span id="cart-count">(0)</span></a></li>
+            <li><a href="#contact">ارتباط با ما</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="slider">
+            <h2>محصولات ویژه</h2>
+            <div class="slider">
+                <div class="slide">محصول ۱</div>
+                <div class="slide">محصول ۲</div>
+                <div class="slide">محصول ۳</div>
+            </div>
+        </section>
+
+        <section id="search">
+            <input type="text" id="search-bar" placeholder="محصول مورد نظر را جستجو کنید" onkeyup="searchProducts()" />
+        </section>
+
+        <section id="categories">
+            <h2>دسته‌بندی محصولات</h2>
+
+            <div class="category">
+                <h3>رژ</h3>
+                <p class="product">رژ قرمز - 50,000 تومان <button class="btn" onclick="addToCart('رژ قرمز', 50000)">اضافه به سبد خرید</button></p>
+                <p class="product">رژ صورتی - 40,000 تومان <button class="btn" onclick="addToCart('رژ صورتی', 40000)">اضافه به سبد خرید</button></p>
+            </div>
+
+            <div class="category">
+                <h3>اکسسوری</h3>
+                <p class="product">مدال طلایی - 80,000 تومان <button class="btn" onclick="addToCart('مدال طلایی', 80000)">اضافه به سبد خرید</button></p>
+                <p class="product">دستبند نقره‌ای - 70,000 تومان <button class="btn" onclick="addToCart('دستبند نقره‌ای', 70000)">اضافه به سبد خرید</button></p>
+            </div>
+        </section>
+
+        <section id="cart" class="cart">
+            <h2>سبد خرید و پرداخت</h2>
+            <ul id="cart-items"></ul>
+            <p id="total">جمع کل: 0 تومان</p>
+            <button class="btn" onclick="showPayment()">پرداخت</button>
+
+            <div id="payment-section" class="hidden">
+                <h3>پرداخت نهایی</h3>
+                <p>جمع کل شما: <span id="final-total">0</span> تومان</p>
+                <p>لطفاً مبلغ را به شماره کارت زیر واریز کنید:</p>
+                <p><strong>شماره کارت:</strong> 1234-5678-9101-1121</p>
+                <p>اطلاعات واریز را به واتساپ ارسال کنید: <strong>۰۹۹۶۲۴۸۸۵۴۹</strong></p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>ارتباط با ما</h2>
+            <ol>
+                <li>شماره واتساپ خرید: ۰۹۹۰۸۱۷۸۴۷۹</li>
+                <li>شماره واتساپ پشتیبانی: ۰۹۹۶۲۴۸۸۵۴۹</li>
+                <li>آیدی اینستاگرام: <a href="https://instagram.com/arayesh_koala">@arayesh_koala</a></li>
+            </ol>
+        </section>
+
+        <section id="map">
+            <h2>مکان ما</h2>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509707!2d-122.42067968468046!3d37.77492977975952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zTGlrZSBFeGFtcGxl!5e0!3m2!1sen!2sus!4v1640012038011!5m2!1sen!2sus"
+                width="90%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </section>
+
+        <section id="contact-form">
+            <h2>ارسال پیام</h2><form id="contactForm">
+                <label for="name">نام:</label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="email">ایمیل:</label>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">پیام:</label>
+                <textarea id="message" name="message" rows="4" required></textarea><br>
+                <button type="submit" class="btn">ارسال</button>
+            </form>
+        </section>
+
+        <section id="faq">
+            <h2>سوالات متداول</h2>
+            <details>
+                <summary>چگونه محصول را سفارش دهم؟</summary>
+                <p>ابتدا محصول مورد نظر را انتخاب کرده و به سبد خرید اضافه کنید. سپس به قسمت پرداخت بروید.</p>
+            </details>
+            <details>
+                <summary>چگونه با پشتیبانی تماس بگیرم؟</summary>
+                <p>از طریق واتساپ یا فرم تماس مستقیم می‌توانید پیام بفرستید.</p>
+            </details>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 سایت آرایش کوآلا | ساخته‌شده با عشق</p>
+        <p>ساخته شده توسط آرتین قلیپور قصابی</p>
+    </footer>
+
+    <div id="notification"></div>
+
+    <script>
+        let cart = [];
+        function addToCart(productName, productPrice) {
+            cart.push({ name: productName, price: productPrice });
+            updateCart();
+            saveCart();
+            showNotification("محصول به سبد خرید اضافه شد!");
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total');
+            const cartCount = document.getElementById('cart-count');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ${item.price} تومان`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            totalElement.textContent = `جمع کل: ${total} تومان`;
+            cartCount.textContent = `(${cart.length})`;
+        }
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCart();
+            }
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('search-bar').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const text = product.textContent.toLowerCase();
+                product.parentElement.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function showPayment() {
+            if (cart.length === 0) {
+                alert("سبد خرید شما خالی است!");
+                return;
+            }
+            document.getElementById('payment-section').classList.remove('hidden');
+            const finalTotalElement = document.getElementById('final-total');
+            finalTotalElement.textContent = cart.reduce((sum, item) => sum + item.price, 0);
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function submitReview() {
+            const review = document.getElementById('user-review').value.trim();
+            if (review) {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.textContent = review;
+                document.getElementById('reviews-list').appendChild(reviewDiv);
+                document.getElementById('user-review').value = '';
+                showNotification("نظر شما با موفقیت ارسال شد!");
+            } else {
+                alert("لطفاً نظر خود را وارد کنید!");
+            }
+        }
+
+        // بارگذاری سبد خرید ذخیره‌شده در شروع صفحه
+        loadCart();
+    </script>
+</body>
+</html>
